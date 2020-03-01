@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [techs, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
-  function handleAdd() {
+  // Só vai ser reacriadana memória quando newTech ou techs mudarem
+  const handleAdd = useCallback(() => {
     setTech([...techs, newTech]);
     setNewTech('');
-  }
+  }, [newTech, techs]);
 
   // Executado uma única vez quando o componente é carregado
   useEffect(() => {
