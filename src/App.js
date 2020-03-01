@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  const [techs, setTech] = useState(['Node.js', 'ReactJS', 'React Native']);
+  const [techs, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
   function handleAdd() {
     setTech([...techs, newTech]);
     setNewTech('');
   }
+
+  // Executado uma única vez quando o componente é carregado
+  useEffect(() => {
+    const storage = localStorage.getItem('techs');
+
+    if (storage) {
+      setTech(JSON.parse(storage));
+    }
+
+    // Executa sempre que um componente deixa de existir
+    return () => {};
+  }, []);
+
+  // Executado toda vez que o estado de techs mudar
+  useEffect(() => {
+    localStorage.setItem('techs', JSON.stringify(techs));
+  }, [techs]);
 
   return (
     <>
