@@ -4,7 +4,7 @@ function App() {
   const [techs, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
-  // Só vai ser reacriadana memória quando newTech ou techs mudarem
+  // Só vai ser reacriada na memória quando newTech ou techs mudarem
   const handleAdd = useCallback(() => {
     setTech([...techs, newTech]);
     setNewTech('');
@@ -27,6 +27,7 @@ function App() {
     localStorage.setItem('techs', JSON.stringify(techs));
   }, [techs]);
 
+  // Realizar operações matemáticas
   const techSize = useMemo(() => techs.length, [techs]);
 
   return (
